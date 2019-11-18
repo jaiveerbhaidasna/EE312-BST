@@ -146,26 +146,28 @@ private:
 //Function implementations
 ********************************/
 
+//Constructor of the templated BST, sets the root of BST to a null pointer
 template<class ItemType>
 BST_312<ItemType>::BST_312 ()
 {
     root = NULL;
 }
 
+//Copy Constructor, calls a helper function to deep copy a templated BST
 template<class ItemType>
 BST_312<ItemType>::BST_312(const BST_312 & src)
 {
     copyTree(root, src.root);
 }
 
+//Destructor, calls the makeEmpty() function to dynamically deallocate BST memory
 template<class ItemType>
 BST_312<ItemType>::~BST_312()
 {
     makeEmpty();
-
 }
 
-
+//Function that makes a deep copy of a templated BST
 template<class ItemType>
 void BST_312<ItemType>::copyTree(TreeNode*& copy, const TreeNode* originalTree)
 {
@@ -181,7 +183,7 @@ void BST_312<ItemType>::copyTree(TreeNode*& copy, const TreeNode* originalTree)
     }
 }
 
-
+//Deletes a given node of a templated BST if said node is found in the tree
 template<class ItemType>
 void BST_312 <ItemType>::deleteNode(TreeNode*& t)
 {
@@ -222,7 +224,7 @@ void BST_312 <ItemType>::getPredecessor(TreeNode* t, ItemType& data)
 
 }
 
-
+//Helper function to delete a specific node of a templated BST based on a given data value
 template<class ItemType>
 void BST_312 <ItemType>::deleteItem(TreeNode*& t, const ItemType& newItem)
 {
@@ -236,7 +238,7 @@ void BST_312 <ItemType>::deleteItem(TreeNode*& t, const ItemType& newItem)
         deleteNode(t);
 }
 
-
+//Calls a helper function to delete a specific node of a BST based on a given data value if said value is found
 template<class ItemType>
 void BST_312 <ItemType>::deleteItem(const ItemType& newItem)
 {
@@ -244,6 +246,7 @@ void BST_312 <ItemType>::deleteItem(const ItemType& newItem)
 
 }
 
+//Helper function that dynamically deallocates all memory of a templated BST and clears all nodes
 template<class ItemType>
 void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
 {
@@ -255,6 +258,7 @@ void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
     }
 }
 
+//Function that calls a helper function to dynamically deallocate a BST
 template<class ItemType>
 void BST_312 <ItemType>::makeEmpty()
 {
@@ -262,14 +266,14 @@ void BST_312 <ItemType>::makeEmpty()
     root = NULL;
 }
 
+//Function that checks if a given templated BST is empty or not, returning true if so, false otherwise
 template<class ItemType>
 bool BST_312 <ItemType>::isEmpty() const
 {
     return root == NULL;
 }
 
-
-
+//Function that checks if a given templated BST is full or not, return true if so, false otherwise
 template<class ItemType>
 bool BST_312 <ItemType>::isFull() const
 {
@@ -286,34 +290,33 @@ bool BST_312 <ItemType>::isFull() const
 
 }
 
-
+//Helper function which inserts a new item into a templated BST if said item is not already in the tree, otherwise does
+//nothing
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {
-        if(t == NULL)
-        {
+    if(!isItemInTree(newItem)) {
+        if (t == NULL) {
             TreeNode *temp = new TreeNode;
             temp->data = newItem;
             temp->left = NULL;
             temp->right = NULL;
             t = temp;
-        }
+        } else if (newItem < t->data)
+            insertItem(t->left, newItem);
         else
-            if(newItem < t->data)
-                insertItem(t->left,newItem);
-            else
-                insertItem(t->right,newItem);
-
+            insertItem(t->right, newItem);
+    }
 }
 
+//Function that calls a helper function to insert a new item into a BST
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(const ItemType& newItem)
 {
     insertItem(root,newItem);
 }
 
-
-
+//Helper function that counts the number of nodes in a templated BST
 template<class ItemType>
 int BST_312 <ItemType>::countNodes(TreeNode* t) const
 {
@@ -327,13 +330,14 @@ int BST_312 <ItemType>::countNodes(TreeNode* t) const
     return count;
 }
 
-
+//Function that calls the helper function to count nodes in the BST
 template<class ItemType>
 int BST_312 <ItemType>::countNodes()
 {
     return countNodes(root);
 }
 
+//Helper function to preOrder traverse a templated BST
 template<class ItemType>
 void BST_312 <ItemType>::preOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
@@ -345,7 +349,7 @@ void BST_312 <ItemType>::preOrderTraversal(TreeNode* t,vector<ItemType>& result)
     }
 }
 
-
+//Function that calls a helper function to preOrder traverse a BST and return said values in a vector
 template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::preOrderTraversal()
 {
@@ -354,6 +358,7 @@ vector<ItemType> BST_312 <ItemType>::preOrderTraversal()
     return values;
 }
 
+//Helper function to inOrder traverse a templated BST
 template<class ItemType>
 void BST_312 <ItemType>::inOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
@@ -365,6 +370,7 @@ void BST_312 <ItemType>::inOrderTraversal(TreeNode* t,vector<ItemType>& result) 
     }
 }
 
+//Function that calls a helper function to inOrder traverse a BST and return said values in a vector
 template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::inOrderTraversal()
 {
@@ -373,6 +379,7 @@ vector<ItemType> BST_312 <ItemType>::inOrderTraversal()
     return values;
 }
 
+//Helper function to postOrder traverse a templated BST
 template<class ItemType>
 void BST_312 <ItemType>::postOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
@@ -384,6 +391,7 @@ void BST_312 <ItemType>::postOrderTraversal(TreeNode* t,vector<ItemType>& result
     }
 }
 
+//Function that calls a helper function to postOrder traverse a BST and return said values in a vector
 template<class ItemType>
 vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
 {
@@ -392,6 +400,7 @@ vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
     return values;
 }
 
+//Function that checks if a given item is in a templated BST, returns true if so, false otherwise
 template<class ItemType>
 bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
 {

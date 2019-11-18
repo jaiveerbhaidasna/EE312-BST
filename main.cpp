@@ -21,7 +21,7 @@ void print(vector<T> vec){
 }
 
 int main() {
-    /*
+
     ifstream inFile;
     inFile.open("test.txt");
 
@@ -55,24 +55,30 @@ int main() {
     cout << endl;
     cout << "number of nodes in tree after delete is " << bst.countNodes() << endl;
     cout << endl;
-    */
 
-    BST_312<int> bst;
-    bst.insertItem(10);
-    bst.insertItem(11);
-    bst.insertItem(7);
-    bst.insertItem(19);
-    bst.insertItem(13);
-    bst.insertItem(6);
-    bst.insertItem(3);
-    bst.insertItem(8);
 
-    print(bst.preOrderTraversal());
-    print(bst.inOrderTraversal());
-    print(bst.postOrderTraversal());
+    BST_312<int> bst2;
+    cout << bst2.countNodes() << "\n\n";
+    bst2.insertItem(10);
+    bst2.insertItem(11);
+    bst2.insertItem(7);
+    bst2.insertItem(19);
+    cout << bst2.countNodes() << "\n\n";
+    bst2.makeEmpty();
+    if(bst2.isEmpty())
+        cout << "GOAT STUFF\n\n";
+    cout << bst2.countNodes() << "\n\n";
+    bst2.insertItem(13);
+    bst2.insertItem(6);
+    bst2.insertItem(3);
+    bst2.insertItem(8);
+    cout << bst2.countNodes() << "\n\n";
 
-    cout << bst.isItemInTree(20) << "\n";
+    print(bst2.preOrderTraversal());
+    print(bst2.inOrderTraversal());
+    print(bst2.postOrderTraversal());
 
+    cout << bst2.isItemInTree(7) << "\n";
 
 }
 
